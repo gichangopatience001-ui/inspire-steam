@@ -1,5 +1,5 @@
-#Name : Patience Mukuhi Gichango
-# Date : 11/02/2026
+#Name : Patience Mukuhi Gichango 
+#Date : 11/02/2026
 # Program to add two numbers
 
 first_number = 12
