@@ -55,3 +55,7 @@ amount_added_2 = "40kes"
 
 cleaned_amount_added_2 = amount_added_2.replace("kes:"," ")
 print("cleaned_amount_added:", cleaned_amount_added_2)
+
+
+#Mpesa_message
+mpesa_message = 
