@@ -13,3 +13,4 @@ for y in range (0,180,30):
     print(math.tan(y))
     print(math.sin(y))
     
+    

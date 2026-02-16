@@ -6,3 +6,7 @@ for x in range (1,100):
     square = x**2
     print(f"The square of {x} is:{square}")
 
+limit = 10
+print(f)
+
+
