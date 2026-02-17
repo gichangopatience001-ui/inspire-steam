@@ -50,12 +50,21 @@ sentence_3 = "confirmed you have recieved 40kes from Phllip"
 split = sentence_3.split(" ")
 print(f"The first subject is:",split[4])
 
-balance_2 = "23.09kes"
-amount_added_2 = "40kes"
+# Replacing characters in a string
 
-cleaned_amount_added_2 = amount_added_2.replace("kes:"," ")
-print("cleaned_amount_added:", cleaned_amount_added_2)
+balance = "200kes"
+amount_added = "40kes"
+
+cleaned_balance = balance.replace("kes"," ")
+
+cleaned_amount_added = amount_added.replace("kes"," ")
+
+new_balance = int(cleaned_balance) + int(cleaned_amount_added)
+
+print("The new balance is:", new_balance)
+
+# Mpesa message 
+mpesa_message = (f"Confirmed . KES {cleaned_amount_added} from wayne")
+print(mpesa_message)
 
 
-#Mpesa_message
-mpesa_message = 
