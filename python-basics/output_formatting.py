@@ -1,5 +1,5 @@
 #Name : Patience Mukuhi Gichango 
-#Date : 16/02/2026
+#Date : 17/02/2026
 # Program to format the output in different types
 
 name = "Patience Mukuhi" 
