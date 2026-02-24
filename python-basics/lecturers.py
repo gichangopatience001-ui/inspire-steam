@@ -1,5 +1,5 @@
 #Name : Patience Mukuhi Gichango 
-#Date : 19/02/2026
+#Date : 23/02/2026
 # Program to show lecturers module in python
 
 name = "Azariah Baraka"

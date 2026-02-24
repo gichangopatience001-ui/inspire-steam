@@ -12,7 +12,7 @@ class Car():
     
     # print cars
     def print_details(self,model,make,colour,year):
-        print("{make}, {model}, of colour {colour}, made in {year}")
+        print(f"{make}, {model}, of colour {colour}, made in {year}")
 
 # instantiate a class object
 
