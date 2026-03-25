@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Module01: h1, h2, p, em, div</title>
+        <style>
+            body {
+                background-color: #111;
+                color: #f0e6d3;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            #page-wrapper {
+                max-width: 700px;
+                margin: 0 auto;
+                padding: 40px 24px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+                margin-bottom: 8px;
+            }
+
+            h2, h3, h4 {
+                letter-spacing: 1px;
+                color: #c89aff;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #333;
+                margin: 24px 0;
+            }
+
+            p {
+                color: #b0a090;
+                line-height: 1.7;
+                margin: 6px 0;
+            }
+
+            small {
+                color: #6b5e50;
+            }
+
+            /* About card */
+            .about-card {
+                background-color: #1a1a1a;
+                border: 1px solid #333;
+                border-radius: 8px;
+                padding: 20px 24px;
+                margin: 16px 0;
+            }
+
+            /* Song list */
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 12px 0;
+            }
+
+            li {
+                padding: 10px 0;
+                border-bottom: 1px solid #2a2a2a;
+                color: #c8b8a0;
+                font-size: 0.95rem;
+            }
+
+            li:last-child {
+                border-bottom: none;
+            }
+
+            /* Lyrics block */
+            .lyrics-block {
+                background-color: #1a1a1a;
+                border: 1px solid #333;
+                border-left: 3px solid #c89aff;
+                border-radius: 8px;
+                padding: 24px;
+                margin: 16px 0;
+                white-space: pre-line;
+                line-height: 1.9;
+                color: #a09080;
+                font-size: 0.9rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="page-wrapper">
+
+            <h1>Music Band</h1>
+            <hr>
+
+            <h2>About the band</h2>
+
+            <div class="about-card">
+                <!-- em (emphasis) b (bold) -->
+                <p>Recording music, <em>One album at a time</em></p>
+                <p>Est <b>2026</b></p>
+
+                <!-- small (small text) -->
+                <p><small><i>Find your Merch at merch.ebay.com</i></small></p>
+            </div>
+
+            <hr>
+
+            <div>
+                <!-- sub (subscript), sup (superscript) -->
+                <ul>
+                    <li>We <sub>Belong</sub> Together</li>
+                    <li>E is MC <sup>2</sup></li>
+                </ul>
+
+                <h4>Lyrics</h4>
+
+                <div class="lyrics-block">
+                    <i>
+I don't have no time for you to be playing
+With my heart like this
+You'll be mine forever baby, you just wait
+We belong together
+And you know that I'm right
+Why do you play with my heart?
+Why do you play with my mind?
+Said we'd be forever
+Said it'd never die
+How could you love me and leave me
+And never say goodbye?
+
+When I can't sleep at night without holding you tight
+Girl, each time I try I just break down and cry
+Pain in my head, oh, I'd rather be dead
+Spinning around and around
+
+Although we've come
+To the end of the road
+Still I can't let go
+It's unnatural
+You belong to me
+I belong to you
+                    </i>
+                </div>
+
+                <hr>
+
+                <h3>Discover</h3>
+            </div>
+
+        </div>
+    </body>
+</html>
