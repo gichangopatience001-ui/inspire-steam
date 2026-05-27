@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pashie | Portfolio</title>
+
+  <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)">
+  <link rel="preconnect" href="[fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+  <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap)" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #1e1710;
+      --surface: #2a1f15;
+      --surface-2: #342618;
+      --card: #2c2218;
+      --border: rgba(255, 233, 196, 0.12);
+
+      --text: #fff6ea;
+      --muted: #d7c1a0;
+      --muted-2: #b69063;
+
+      --accent: #d59b2b;
+      --accent-2: #f0c76b;
+      --accent-3: #f7e2b3;
+      --accent-soft: rgba(213, 155, 43, 0.16);
+      --glow: rgba(240, 199, 107, 0.24);
+
+      --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+      --container: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background:
+        radial-gradient(circle at 80% 15%, rgba(240, 199, 107, 0.10), transparent 25%),
+        radial-gradient(circle at 15% 80%, rgba(213, 155, 43, 0.10), transparent 22%),
+        linear-gradient(180deg, #19120c, #21170f 45%, #1b140e);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(100% - 2rem, var(--container));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 110px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-head .mini {
+      color: var(--muted-2);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.85rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-head h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--accent-3);
+    }
+
+    .section-line {
+      width: 100px;
+      height: 4px;
+      border-radius: 999px;
+      margin: 1rem auto 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px var(--glow);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(14px);
+      background: rgba(24, 17, 11, 0.78);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-3);
+      letter-spacing: -0.04em;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: 0.25s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-3);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 100%;
+      height: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    /* hero */
+    .hero {
+      min-height: calc(100vh - 78px);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(240, 199, 107, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 199, 107, 0.05) 1px, transparent 1px);
+      background-size: 58px 58px;
+      mask-image: radial-gradient(circle at center, black 28%, transparent 82%);
+      pointer-events: none;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(240, 199, 107, 0.28);
+      background: rgba(240, 199, 107, 0.08);
+      color: var(--accent-2);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(3rem, 8vw, 6.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 1rem;
+      color: #fff8ee;
+    }
+
+    .hero-title .name {
+      color: var(--accent);
+      text-shadow: 0 0 24px rgba(240, 199, 107, 0.18);
+    }
+
+    .hero-subtitle {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.4rem, 3vw, 2.7rem);
+      color: #ead7ba;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-desc {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.8rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 0.95rem 1.4rem;
+      border-radius: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      color: #2b1b0f;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 28px rgba(213, 155, 43, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 34px rgba(213, 155, 43, 0.33);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      border-color: var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: rgba(240, 199, 107, 0.25);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .socials {
+      display: flex;
+      gap: 0.9rem;
+    }
+
+    .socials a {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      transition: 0.25s ease;
+    }
+
+    .socials a:hover {
+      color: var(--accent-3);
+      border-color: rgba(240, 199, 107, 0.32);
+      box-shadow: 0 0 0 6px rgba(240, 199, 107, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .hero-photo-shell {
+      position: relative;
+      width: min(420px, 88vw);
+      aspect-ratio: 1 / 1;
+      margin-inline: auto;
+      border-radius: 36px;
+      padding: 1.2rem;
+      background:
+        linear-gradient(180deg, rgba(240, 199, 107, 0.16), rgba(255,255,255,0.03)),
+        rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-photo-shell::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 241, 219, 0.08);
+      pointer-events: none;
+    }
+
+    .hero-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 28px;
+      box-shadow: 0 0 30px rgba(240, 199, 107, 0.08);
+    }
+
+    /* about */
+    #about {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-card {
+      background: linear-gradient(180deg, #302114, #241911);
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .about-content h3 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 1rem;
+      color: #fff8ee;
+    }
+
+    .about-content h3 span {
+      color: var(--accent);
+    }
+
+    .about-content p {
+      color: var(--muted);
+      font-size: 1.04rem;
+      margin-bottom: 1.7rem;
+      max-width: 680px;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .tag {
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      color: #f6e5c4;
+      font-size: 0.95rem;
+    }
+
+    /* skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.95fr;
+      gap: 2rem;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, #2b1f15, #21170f);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.7rem;
+      margin-bottom: 0.6rem;
+      color: var(--accent-3);
+    }
+
+    .panel .lead {
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .skill {
+      margin-bottom: 1.4rem;
+    }
+
+    .skill:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.7rem;
+      gap: 1rem;
+    }
+
+    .skill-name {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      color: #fff8ee;
+    }
+
+    .skill-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(240, 199, 107, 0.09);
+      border: 1px solid rgba(240, 199, 107, 0.18);
+    }
+
+    .skill-percent {
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+
+    .skill-track {
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width 1.2s ease;
+    }
+
+    .quote-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top, rgba(240, 199, 107, 0.10), transparent 35%),
+        linear-gradient(180deg, #2b2016, #1f160f);
+    }
+
+    .quote-card blockquote {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      line-height: 1.35;
+      color: #fff8ef;
+      max-width: 420px;
+    }
+
+    .quote-card span {
+      display: block;
+      margin-top: 1rem;
+      color: var(--muted-2);
+      font-size: 1rem;
+      font-family: "DM Sans", sans-serif;
+    }
+
+    /* work */
+    #work {
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+    }
+
+    .work-card {
+      background: linear-gradient(180deg, #2c2116, #21170f);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .work-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(240, 199, 107, 0.28);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.38);
+    }
+
+    /* Upload Zone */
+    .work-upload-zone {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(240, 199, 107, 0.05), transparent 70%),
+        #1e160d;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      overflow: hidden;
+      transition: 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .work-upload-zone:hover .upload-placeholder {
+      border-color: rgba(240, 199, 107, 0.4);
+      background: rgba(240, 199, 107, 0.07);
+    }
+
+    .work-upload-zone:hover .upload-icon {
+      transform: scale(1.1);
+      color: var(--accent-2);
+    }
+
+    .upload-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      border: 2px dashed rgba(240, 199, 107, 0.22);
+      border-radius: 16px;
+      padding: 1.6rem 1.8rem;
+      transition: 0.25s ease;
+      text-align: center;
+    }
+
+    .upload-icon {
+      font-size: 2rem;
+      transition: 0.25s ease;
+      color: var(--muted-2);
+    }
+
+    .upload-placeholder span {
+      font-size: 0.82rem;
+      color: var(--muted-2);
+      line-height: 1.4;
+    }
+
+    .upload-placeholder strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--accent-2);
+      margin-bottom: 0.1rem;
+    }
+
+    .work-upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .work-screenshot {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: none;
+      transition: transform 0.4s ease;
+    }
+
+    .work-card:hover .work-screenshot {
+      transform: scale(1.03);
+    }
+
+    .work-screenshot.loaded {
+      display: block;
+    }
+
+    .screenshot-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 55%, rgba(20,13,7,0.75));
+      opacity: 0;
+      transition: 0.3s ease;
+      pointer-events: none;
+    }
+
+    .work-card:hover .screenshot-overlay {
+      opacity: 1;
+    }
+
+    /* Change photo button */
+    .change-photo-btn {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.6rem;
+      background: rgba(20,13,7,0.75);
+      border: 1px solid rgba(240, 199, 107, 0.3);
+      color: var(--accent-2);
+      border-radius: 10px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.72rem;
+      font-family: "DM Sans", sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 0.3rem;
+      backdrop-filter: blur(8px);
+      transition: 0.2s ease;
+      pointer-events: all;
+      z-index: 5;
+    }
+
+    .change-photo-btn:hover {
+      background: rgba(213, 155, 43, 0.2);
+    }
+
+    .change-photo-btn.visible {
+      display: flex;
+    }
+
+    /* Card body */
+    .work-card-body {
+      padding: 1.25rem 1.4rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .work-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .work-title-input {
+      font-family: "Playfair Display", serif;
+      font-size: 1.25rem;
+      color: var(--accent-3);
+      background: transparent;
+      border: none;
+      border-bottom: 1.5px solid transparent;
+      outline: none;
+      width: 100%;
+      padding: 0.1rem 0;
+      transition: border-color 0.2s ease;
+      cursor: text;
+    }
+
+    .work-title-input:focus {
+      border-bottom-color: rgba(240, 199, 107, 0.35);
+    }
+
+    .work-title-input::placeholder {
+      color: rgba(247, 226, 179, 0.35);
+    }
+
+    .work-desc-input {
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      resize: none;
+      min-height: 50px;
+      line-height: 1.6;
+      cursor: text;
+      transition: color 0.2s ease;
+      padding: 0;
+    }
+
+    .work-desc-input:focus {
+      color: var(--text);
+    }
+
+    .work-desc-input::placeholder {
+      color: rgba(215, 193, 160, 0.35);
+    }
+
+    .edit-hint {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.73rem;
+      color: rgba(182, 144, 99, 0.45);
+      margin-top: auto;
+      padding-top: 0.3rem;
+    }
+
+    /* Lock button */
+    .lock-btn {
+      display: none;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 0.6rem;
+      padding: 0.55rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(240, 199, 107, 0.3);
+      background: rgba(240, 199, 107, 0.07);
+      color: var(--accent-2);
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      justify-content: center;
+      transition: 0.2s ease;
+    }
+
+    .lock-btn:hover {
+      background: rgba(240, 199, 107, 0.14);
+      border-color: rgba(240, 199, 107, 0.5);
+    }
+
+    .lock-btn.ready {
+      display: flex;
+    }
+
+    /* Locked card state */
+    .work-card.locked .work-upload-zone input[type="file"] {
+      pointer-events: none;
+    }
+
+    .work-card.locked .upload-placeholder {
+      cursor: default;
+    }
+
+    .work-card.locked .change-photo-btn,
+    .work-card.locked .edit-hint,
+    .work-card.locked .lock-btn {
+      display: none !important;
+    }
+
+    .work-card.locked .work-title-input,
+    .work-card.locked .work-desc-input {
+      pointer-events: none;
+      cursor: default;
+      border-bottom-color: transparent !important;
+      user-select: text;
+    }
+
+    .locked-badge {
+      display: none;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      color: rgba(182, 144, 99, 0.5);
+      margin-top: auto;
+      padding-top: 0.3rem;
+    }
+
+    .work-card.locked .locked-badge {
+      display: flex;
+    }
+
+    /* drag-over state */
+    .work-upload-zone.drag-over {
+      background: rgba(240, 199, 107, 0.08);
+    }
+
+    .work-upload-zone.drag-over .upload-placeholder {
+      border-color: rgba(240, 199, 107, 0.6);
+      background: rgba(240, 199, 107, 0.1);
+    }
+
+    @media (max-width: 900px) {
+      .work-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* contact */
+    #contact {
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .contact-copy h3 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: #fff8ef;
+      margin-bottom: 1rem;
+      line-height: 1.08;
+    }
+
+    .contact-copy p {
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+      max-width: 500px;
+    }
+
+    .contact-note {
+      padding: 1rem 1.2rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      color: #f6e5c4;
+      display: inline-block;
+    }
+
+    .contact-form {
+      background: linear-gradient(180deg, #2b1f15, #21170f);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 233, 196, 0.10);
+      background: rgba(255,255,255,0.03);
+      border-radius: 14px;
+      color: var(--text);
+      padding: 1rem;
+      font: inherit;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: #bda17a;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: rgba(240, 199, 107, 0.32);
+      box-shadow: 0 0 0 4px rgba(240, 199, 107, 0.08);
+    }
+
+    .field textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .footer strong {
+      color: var(--accent);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-layout,
+      .about-grid,
+      .skills-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-photo-shell {
+        width: min(380px, 90vw);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-inner {
+        min-height: 72px;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0.9rem 0;
+      }
+
+      .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 88px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#home" class="logo">P<span>.</span></a>
+
+      <ul class="nav-links">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-layout">
+        <div class="reveal">
+          <div class="hero-badge">Available for Creative Projects</div>
+
+          <h1 class="hero-title">
+            Hey, I'm <span class="name">Pashie</span>
+          </h1>
+
+          <div class="hero-subtitle">Creative Designer & Developer</div>
+
+          <p class="hero-desc">
+            I create warm, stylish, and engaging digital experiences with a love for beautiful
+            design, thoughtful details, and soft modern aesthetics.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Contact Me</a>
+            <a href="#work" class="btn btn-secondary">View Work</a>
+          </div>
+
+          <div class="socials">
+            <a href="#" aria-label="Instagram" title="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm4.25 3a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm5.75-.75a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+              </svg>
+            </a>
+
+            <a href="#" aria-label="Pinterest" title="Pinterest">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.017 2C6.486 2 3 5.686 3 10.438c0 3.022 1.687 5.687 4.388 6.685.048-.568.091-1.442-.019-2.062-.099-.562-.639-3.577-.639-3.577s-.163-.327-.163-.809c0-.758.439-1.324.986-1.324.465 0 .689.349.689.768 0 .468-.298 1.168-.452 1.817-.129.546.274.991.813.991.976 0 1.726-1.03 1.726-2.516 0-1.315-.945-2.235-2.294-2.235-1.562 0-2.478 1.171-2.478 2.382 0 .472.182.979.41 1.255a.165.165 0 0 1 .038.158c-.041.174-.133.546-.151.622-.024.1-.079.121-.182.073-.679-.317-1.104-1.314-1.104-2.116 0-1.722 1.251-3.301 3.609-3.301 1.894 0 3.367 1.35 3.367 3.155 0 1.882-1.187 3.396-2.834 3.396-.553 0-1.073-.287-1.251-.627l-.34 1.297c-.123.474-.456 1.068-.679 1.431.511.158 1.052.243 1.612.243 5.53 0 9.017-3.686 9.017-8.438C21.034 5.686 17.547 2 12.017 2z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="hero-photo-shell">
+            <img src="assets/pashie-profile.png" alt="Pashie profile photo" class="hero-photo">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="mini">Get to know me</div>
+          <h2>About Pashie</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="about-grid reveal">
+          <div class="about-card">
+            <div class="about-photo">
+              <img src="assets/pashie-profile.png" alt="Pashie portrait">
+            </div>
+          </div>
+
+          <div class="about-content">
+            <h3>Hello, I’m <span>Pashie</span></h3>
+            <p>
+              I’m a creative digital designer and developer with a soft, elegant style and a love
+              for warm, welcoming visuals. I enjoy building beautiful websites, shaping thoughtful
+              user experiences, and bringing ideas to life with charm, clarity, and personality.
+            </p>
+
+            <div class="about-tags">
+              <div class="tag">Creative Design</div>
+              <div class="tag">UI/UX</div>
+              <div class="tag">Web Development</div>
+              <div class="tag">Brand Styling</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="mini">What I do</div>
+          <h2>My Skills</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="skills-grid">
+          <div class="panel reveal">
+            <h3>Creative Strengths</h3>
+            <p class="lead">
+              I blend creativity, detail, and style to create polished digital experiences that feel personal and memorable.
+            </p>
+
+            <div class="skill">
+              <div class="skill-top">
+                <div class="skill-name"><div class="skill-icon">🎨</div> UI/UX Design</div>
+                <div class="skill-percent">92%</div>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-width="92"></div></div>
+            </div>
+
+            <div class="skill">
+              <div class="skill-top">
+                <div class="skill-name"><div class="skill-icon">💻</div> Web Design</div>
+                <div class="skill-percent">88%</div>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-width="88"></div></div>
+            </div>
+
+            <div class="skill">
+              <div class="skill-top">
+                <div class="skill-name"><div class="skill-icon">✨</div> Branding</div>
+                <div class="skill-percent">85%</div>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+
+            <div class="skill">
+              <div class="skill-top">
+                <div class="skill-name"><div class="skill-icon">🧁</div> Creative Direction</div>
+                <div class="skill-percent">90%</div>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+            </div>
+          </div>
+
+          <div class="panel quote-card reveal">
+            <div>
+              <blockquote>
+                “Soft design can still be bold, expressive, and unforgettable.”
+              </blockquote>
+              <span>— Pashie</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="mini">Selected ideas</div>
+          <h2>My Work</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="work-grid" id="workGrid">
+
+          <!-- Card 1 -->
+          <div class="work-card reveal" data-card="0">
+            <div class="work-upload-zone" id="zone0">
+              <input type="file" accept="image/*" onchange="handleUpload(this, 0)" title="Upload screenshot">
+              <div class="upload-placeholder" id="placeholder0">
+                <div class="upload-icon">🖼️</div>
+                <div><strong>Upload Screenshot</strong><span>Click or drag & drop your image here</span></div>
+              </div>
+              <img class="work-screenshot" id="img0" alt="Work screenshot">
+              <div class="screenshot-overlay"></div>
+              <button class="change-photo-btn" id="changeBtn0" onclick="triggerUpload(0, event)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                Change Photo
+              </button>
+            </div>
+            <div class="work-card-body">
+              <input class="work-title-input" type="text" placeholder="Project Title" value="Personal Brand Page">
+              <textarea class="work-desc-input" placeholder="Add a short description…" rows="2">A stylish landing page with soft colors, elegant typography, and a warm feminine feel.</textarea>
+              <div class="edit-hint"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg> Click title or description to edit</div>
+              <button class="lock-btn" id="lockBtn0" onclick="lockCard(0)">🔒 Save &amp; Lock — make permanent</button>
+              <div class="locked-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm3.1-9H8.9V6a3.1 3.1 0 1 1 6.2 0v2z"/></svg> Locked · view only</div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="work-card reveal" data-card="1">
+            <div class="work-upload-zone" id="zone1">
+              <input type="file" accept="image/*" onchange="handleUpload(this, 1)" title="Upload screenshot">
+              <div class="upload-placeholder" id="placeholder1">
+                <div class="upload-icon">🖼️</div>
+                <div><strong>Upload Screenshot</strong><span>Click or drag & drop your image here</span></div>
+              </div>
+              <img class="work-screenshot" id="img1" alt="Work screenshot">
+              <div class="screenshot-overlay"></div>
+              <button class="change-photo-btn" id="changeBtn1" onclick="triggerUpload(1, event)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                Change Photo
+              </button>
+            </div>
+            <div class="work-card-body">
+              <input class="work-title-input" type="text" placeholder="Project Title" value="Fashion Showcase">
+              <textarea class="work-desc-input" placeholder="Add a short description…" rows="2">A curated product display layout designed for beauty, fashion, and lifestyle brands.</textarea>
+              <div class="edit-hint"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg> Click title or description to edit</div>
+              <button class="lock-btn" id="lockBtn1" onclick="lockCard(1)">🔒 Save &amp; Lock — make permanent</button>
+              <div class="locked-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm3.1-9H8.9V6a3.1 3.1 0 1 1 6.2 0v2z"/></svg> Locked · view only</div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="work-card reveal" data-card="2">
+            <div class="work-upload-zone" id="zone2">
+              <input type="file" accept="image/*" onchange="handleUpload(this, 2)" title="Upload screenshot">
+              <div class="upload-placeholder" id="placeholder2">
+                <div class="upload-icon">🖼️</div>
+                <div><strong>Upload Screenshot</strong><span>Click or drag & drop your image here</span></div>
+              </div>
+              <img class="work-screenshot" id="img2" alt="Work screenshot">
+              <div class="screenshot-overlay"></div>
+              <button class="change-photo-btn" id="changeBtn2" onclick="triggerUpload(2, event)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                Change Photo
+              </button>
+            </div>
+            <div class="work-card-body">
+              <input class="work-title-input" type="text" placeholder="Project Title" value="Event Invitation Site">
+              <textarea class="work-desc-input" placeholder="Add a short description…" rows="2">A lovely and elegant event-style website with graceful sections and beautiful spacing.</textarea>
+              <div class="edit-hint"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg> Click title or description to edit</div>
+              <button class="lock-btn" id="lockBtn2" onclick="lockCard(2)">🔒 Save &amp; Lock — make permanent</button>
+              <div class="locked-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm3.1-9H8.9V6a3.1 3.1 0 1 1 6.2 0v2z"/></svg> Locked · view only</div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="work-card reveal" data-card="3">
+            <div class="work-upload-zone" id="zone3">
+              <input type="file" accept="image/*" onchange="handleUpload(this, 3)" title="Upload screenshot">
+              <div class="upload-placeholder" id="placeholder3">
+                <div class="upload-icon">🖼️</div>
+                <div><strong>Upload Screenshot</strong><span>Click or drag & drop your image here</span></div>
+              </div>
+              <img class="work-screenshot" id="img3" alt="Work screenshot">
+              <div class="screenshot-overlay"></div>
+              <button class="change-photo-btn" id="changeBtn3" onclick="triggerUpload(3, event)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                Change Photo
+              </button>
+            </div>
+            <div class="work-card-body">
+              <input class="work-title-input" type="text" placeholder="Project Title" value="Cozy Aesthetic Blog">
+              <textarea class="work-desc-input" placeholder="Add a short description…" rows="2">A warm editorial-inspired interface for storytelling, journaling, and visual mood content.</textarea>
+              <div class="edit-hint"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg> Click title or description to edit</div>
+              <button class="lock-btn" id="lockBtn3" onclick="lockCard(3)">🔒 Save &amp; Lock — make permanent</button>
+              <div class="locked-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm3.1-9H8.9V6a3.1 3.1 0 1 1 6.2 0v2z"/></svg> Locked · view only</div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="work-card reveal" data-card="4">
+            <div class="work-upload-zone" id="zone4">
+              <input type="file" accept="image/*" onchange="handleUpload(this, 4)" title="Upload screenshot">
+              <div class="upload-placeholder" id="placeholder4">
+                <div class="upload-icon">🖼️</div>
+                <div><strong>Upload Screenshot</strong><span>Click or drag & drop your image here</span></div>
+              </div>
+              <img class="work-screenshot" id="img4" alt="Work screenshot">
+              <div class="screenshot-overlay"></div>
+              <button class="change-photo-btn" id="changeBtn4" onclick="triggerUpload(4, event)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                Change Photo
+              </button>
+            </div>
+            <div class="work-card-body">
+              <input class="work-title-input" type="text" placeholder="Project Title" value="Portfolio Design">
+              <textarea class="work-desc-input" placeholder="Add a short description…" rows="2">A polished portfolio concept focused on charm, confidence, and clear presentation.</textarea>
+              <div class="edit-hint"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg> Click title or description to edit</div>
+              <button class="lock-btn" id="lockBtn4" onclick="lockCard(4)">🔒 Save &amp; Lock — make permanent</button>
+              <div class="locked-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm3.1-9H8.9V6a3.1 3.1 0 1 1 6.2 0v2z"/></svg> Locked · view only</div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="work-card reveal" data-card="5">
+            <div class="work-upload-zone" id="zone5">
+              <input type="file" accept="image/*" onchange="handleUpload(this, 5)" title="Upload screenshot">
+              <div class="upload-placeholder" id="placeholder5">
+                <div class="upload-icon">🖼️</div>
+                <div><strong>Upload Screenshot</strong><span>Click or drag & drop your image here</span></div>
+              </div>
+              <img class="work-screenshot" id="img5" alt="Work screenshot">
+              <div class="screenshot-overlay"></div>
+              <button class="change-photo-btn" id="changeBtn5" onclick="triggerUpload(5, event)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                Change Photo
+              </button>
+            </div>
+            <div class="work-card-body">
+              <input class="work-title-input" type="text" placeholder="Project Title" value="Creative UI Set">
+              <textarea class="work-desc-input" placeholder="Add a short description…" rows="2">A collection of soft and elegant interface pieces designed for modern digital products.</textarea>
+              <div class="edit-hint"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg> Click title or description to edit</div>
+              <button class="lock-btn" id="lockBtn5" onclick="lockCard(5)">🔒 Save &amp; Lock — make permanent</button>
+              <div class="locked-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm3.1-9H8.9V6a3.1 3.1 0 1 1 6.2 0v2z"/></svg> Locked · view only</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="mini">Reach out</div>
+          <h2>Contact Me</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-copy reveal">
+            <h3>Let’s create something beautiful together.</h3>
+            <p>
+              If you’d like a warm, stylish website or a beautifully designed creative project,
+              send me a message and let’s bring your idea to life.
+            </p>
+            <div class="contact-note">Open to creative collaborations and design projects.</div>
+          </div>
+
+          <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+            <div class="field">
+              <input type="text" placeholder="Name" required>
+            </div>
+
+            <div class="field">
+              <input type="email" placeholder="Email" required>
+            </div>
+
+            <div class="field">
+              <input type="text" placeholder="Subject">
+            </div>
+
+            <div class="field">
+              <textarea placeholder="Your message..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary submit-btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 <strong>Pashie</strong>. Designed with warmth and style.</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+
+          entry.target.querySelectorAll(".skill-fill").forEach((bar) => {
+            bar.style.width = bar.dataset.width + "%";
+          });
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const sections = document.querySelectorAll("main section[id]");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 120;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+
+    // ── Work Card: Upload, Lock & Persist ──────────────────────────────────
+    const STORAGE_KEY = 'pashie_work_cards';
+
+    function saveCards() {
+      const data = [];
+      for (let i = 0; i < 6; i++) {
+        const card = document.querySelector('[data-card="' + i + '"]');
+        const img  = document.getElementById('img' + i);
+        data.push({
+          image:  img.src && img.classList.contains('loaded') ? img.src : null,
+          title:  card.querySelector('.work-title-input').value,
+          desc:   card.querySelector('.work-desc-input').value,
+          locked: card.classList.contains('locked')
+        });
+      }
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+    }
+
+    function loadCards() {
+      let data;
+      try { data = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) {}
+      if (!data) return;
+      data.forEach((d, i) => {
+        const card = document.querySelector('[data-card="' + i + '"]');
+        if (!card) return;
+        const titleInput = card.querySelector('.work-title-input');
+        const descInput  = card.querySelector('.work-desc-input');
+        if (d.title) titleInput.value = d.title;
+        if (d.desc)  descInput.value  = d.desc;
+        if (d.image) {
+          const img = document.getElementById('img' + i);
+          img.src = d.image;
+          img.classList.add('loaded');
+          document.getElementById('placeholder' + i).style.display = 'none';
+          if (!d.locked) document.getElementById('changeBtn' + i).classList.add('visible');
+        }
+        if (d.locked) applyLock(i);
+        else if (d.image) showLockButton(i);
+      });
+    }
+
+    function handleUpload(input, index) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = document.getElementById('img' + index);
+        img.src = e.target.result;
+        img.classList.add('loaded');
+        document.getElementById('placeholder' + index).style.display = 'none';
+        document.getElementById('changeBtn' + index).classList.add('visible');
+        showLockButton(index);
+        saveCards();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function showLockButton(index) {
+      document.getElementById('lockBtn' + index).classList.add('ready');
+    }
+
+    function triggerUpload(index, event) {
+      event.stopPropagation();
+      document.getElementById('zone' + index).querySelector('input[type="file"]').click();
+    }
+
+    function lockCard(index) {
+      applyLock(index);
+      saveCards();
+    }
+
+    function applyLock(index) {
+      const card = document.querySelector('[data-card="' + index + '"]');
+      card.classList.add('locked');
+      // Disable file input entirely
+      const fileInput = card.querySelector('input[type="file"]');
+      fileInput.disabled = true;
+      fileInput.style.pointerEvents = 'none';
+      // Make text inputs read-only
+      card.querySelector('.work-title-input').readOnly = true;
+      card.querySelector('.work-desc-input').readOnly  = true;
+    }
+
+    // Auto-show lock button when user types in title/desc (if image already uploaded)
+    document.querySelectorAll('.work-card').forEach((card, i) => {
+      card.querySelector('.work-title-input').addEventListener('input', () => {
+        const img = document.getElementById('img' + i);
+        if (img.classList.contains('loaded')) showLockButton(i);
+        saveCards();
+      });
+      card.querySelector('.work-desc-input').addEventListener('input', () => {
+        saveCards();
+      });
+    });
+
+    // Drag & drop support
+    document.querySelectorAll('.work-upload-zone').forEach((zone, i) => {
+      zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('drag-over'); });
+      zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.classList.remove('drag-over');
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) handleUpload({ files: [file] }, i);
+      });
+    });
+
+    // Restore saved data on page load
+    loadCards();
+
+    function handleSubmit(e) {
+      const originalText = btn.textContent;
+      btn.textContent = "Message Sent ✓";
+      btn.style.background = "linear-gradient(135deg, #c38b26, #e9bf62)";
+
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = "";
+        e.target.reset();
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
